@@ -1,0 +1,26 @@
+{
+  "name": "keksobooking",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "browser-sync start --server --no-ui --files \"js/**/*.js\"",
+    "test": "eslint js/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sergGrinevsky/keksobooking.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sergGrinevsky/keksobooking/issues"
+  },
+  "homepage": "https://github.com/sergGrinevsky/keksobooking#readme",
+  "devDependencies": {
+    "browser-sync": "^2.27.7",
+    "eslint": "^8.10.0",
+    "eslint-config-htmlacademy": "^5.0.0"
+  }
+}
