@@ -11,9 +11,9 @@ function getArrayRandomElements (array) {
   return results;
 }
 
-// Функция для получения случайного элемента массива (индекса)
+// Функция для получения случайного элемента массива
 function getElementOfArray (array) {
-  return getRandomIntInclusive(0, array.length - 1);
+  return array[getRandomIntInclusive(0, array.length - 1)];
 }
 
 // Функция для генерации случайного целого числа в диапазоне включительно
