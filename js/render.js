@@ -5,68 +5,65 @@ const cards = createObject();
 const mapCanvas = document.querySelector('#map-canvas');
 
 // Шаблон для заполнения
-const templateCard = document.querySelector('#card').content;
-const popupCard = templateCard.querySelector('.popup');
+const templateCard = document.querySelector('#card').content.querySelector('.popup');
 
 // Функция для генерации разметки
-// function renderCard (card, ) {};
-
-
-popupCard.querySelector('.popup__title').textContent = cards[0].offer.title;
-
-popupCard.querySelector('.popup__text--address').textContent = cards[0].offer.address;
-
-popupCard.querySelector('.popup__text--price').textContent = `${cards[0].offer.price} ₽/ночь`;
-
-popupCard.querySelector('.popup__type').textContent = getTypeOffer(cards[0].offer.type);
-function getTypeOffer (type) {
-  switch (type) {
-    case 'flat':
-      return 'Квартира';
-    case 'bungalow':
-      return 'Бунгало';
-    case 'house':
-      return 'Дом';
-    case 'palace':
-      return 'Дворец';
+function renderCard (card) {
+  const template = templateCard.cloneNode(true);
+  template.querySelector('.popup__title').textContent = card.offer.title;
+  template.querySelector('.popup__text--address').textContent = card.offer.address;
+  template.querySelector('.popup__text--price').textContent = `${card.offer.price} ₽/ночь`;
+  template.querySelector('.popup__text--capacity').textContent = `${card.offer.rooms} комнаты для ${card.offer.quests} гостей`;
+  template.querySelector('.popup__text--time').textContent = `Заезд после ${card.offer.checkin}, выезд до ${card.offer.checkout}`;
+  template.querySelector('.popup__description').textContent = card.offer.description;
+  template.querySelector('.popup__avatar').src = card.author.avatar;
+  template.querySelector('.popup__type').textContent = getTypeOffer(card.offer.type);
+  function getTypeOffer (type) {
+    switch (type) {
+      case 'flat':
+        return 'Квартира';
+      case 'bungalow':
+        return 'Бунгало';
+      case 'house':
+        return 'Дом';
+      case 'palace':
+        return 'Дворец';
+    }
   }
+  const features = template.querySelector('.popup__features');
+  getFeaturesOffer(card.offer.features);
+  function getFeaturesOffer (array) {
+    features.innerHTML = '';
+    for (let i = 0; i < array.length; i++) {
+      const feature = document.createElement('li');
+      feature.classList.add('popup__feature');
+      feature.classList.add(`popup__feature--${array[i]}`);
+
+      features.appendChild(feature);
+    }
+  }
+  const photos = template.querySelector('.popup__photos');
+  const photo = template.querySelector('.popup__photo');
+  getScrImage(card.offer.photos);
+  function getScrImage (array) {
+    photos.innerHTML = '';
+    for (let i = 0; i < array.length; i++) {
+      const img = photo.cloneNode(false);
+      img.src = array[i];
+
+      photos.appendChild(img);
+    }
+  }
+
+  return template;
 }
 
-popupCard.querySelector('.popup__text--capacity').textContent = `${cards[0].offer.rooms} комнаты для ${cards[0].offer.quests} гостей`;
 
-popupCard.querySelector('.popup__text--time').textContent = `Заезд после ${cards[0].offer.checkin}, выезд до ${cards[0].offer.checkout}`;
-
-const popupFeatures = popupCard.querySelector('.popup__features');
-getFeaturesOffer(cards[0].offer.features);
-function getFeaturesOffer (array) {
-  popupFeatures.innerHTML = '';
-  for (let i = 0; i < array.length; i++) {
-    const feature = document.createElement('li');
-    feature.classList.add('popup__feature');
-    feature.classList.add(`popup__feature--${array[i]}`);
-
-    popupFeatures.appendChild(feature);
-  }
-}
-
-popupCard.querySelector('.popup__description').textContent = cards[0].offer.description;
-
-const popupPhotos = popupCard.querySelector('.popup__photos');
-const image = popupPhotos.querySelector('.popup__photo');
-getScrImage(cards[0].offer.photos);
-function getScrImage (array) {
-  popupPhotos.innerHTML = '';
-  for (let i = 0; i < array.length; i++) {
-    const img = image.cloneNode(false);
-    img.src = array[i];
-
-    popupPhotos.appendChild(img);
-  }
-}
-
-popupCard.querySelector('.popup__avatar').src = cards[0].author.avatar;
-
-console.log(popupCard.children);
+// for (let i = 0; i < cards.length; i++) {
+//   const declarationCard = renderCard(cards[i]);
+//   mapCanvas.appendChild(declarationCard);
+// }
 
 // Отрисуем на странице шаблон
-mapCanvas.appendChild(templateCard);
+const declarationCard = renderCard(cards[0]);
+mapCanvas.appendChild(declarationCard);
