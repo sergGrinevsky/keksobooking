@@ -10,6 +10,9 @@ const price = form.querySelector('#price');
 const timein = form.querySelector('#timein');
 const timeout = form.querySelector('#timeout');
 
+const address = form.querySelector('#address');
+address.readOnly = true;
+
 const typeInitialPrice = {
   bungalow: 0,
   flat: 1000,
@@ -64,23 +67,5 @@ function enableFilter () {
 
 disableForm();
 disableFilter();
-/*
-Реализуйте с помощью JavaScript перевод страницы в неактивное состояние, все пункты, кроме первого про карту.
 
-Важно. Неактивность должна добавляться именно средствами JavaScript, иначе,
-если классы и атрибуты добавить напрямую в HTML, при ошибке в скриптах
-или ошибке загрузки скриптов сайт будет недоступен пользователю.
-
-1.1. Неактивное состояние. При открытии страница находится в неактивном состоянии:
-
-  DONE 1. На месте карты отображается серый прямоугольник.
-
-  DONE 2. Форма заполнения информации об объявлении .ad-form содержит класс ad-form--disabled;
-
-  DONE 3. Все интерактивные элементы формы .ad-form должны быть заблокированы
-  с помощью атрибута disabled, добавленного на них или на их родительские блоки fieldset;
-
-  DONE 4. Форма с фильтрами .map__filters заблокирована так же,
-  как и форма .ad-form — на форму добавлен специальный класс,
-  а на её интерактивные элементы атрибуты disabled.
-*/
+export {address, enableForm, enableFilter};
