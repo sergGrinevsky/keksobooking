@@ -1,4 +1,8 @@
 const form = document.querySelector('.ad-form');
+const formElements = Array.from(form.children);
+
+const filter = document.querySelector('.map__filters');
+const filterElements = Array.from(filter.children);
 
 const type = form.querySelector('#type');
 const price = form.querySelector('#price');
@@ -30,31 +34,53 @@ timeout.addEventListener('change', () => {
   timein.value = timeout.value;
 });
 
-/*  TODO
-1. Заведите модуль, который будет отвечать за работу с формой.
+function disableForm () {
+  form.classList.add('ad-form--disabled');
+  formElements.forEach((element) => {
+    element.disabled = true;
+  });
+}
 
-2.Опишите в нём код, который реализует логику обработки пользовательского ввода для полей:
+function enableForm () {
+  form.classList.remove('ad-form--disabled');
+  formElements.forEach((element) => {
+    element.disabled = false;
+  });
+}
 
-2.1 «Тип жилья» — выбор опции меняет атрибуты минимального значения и
-плейсхолдера поля «Цена за ночь»;
-Поле «Тип жилья» влияет на минимальное значение поля «Цена за ночь»:
-  «Бунгало» — минимальная цена за ночь 0;
-  «Квартира» — минимальная цена за ночь 1 000;
-  «Отель» — минимальная цена за ночь 3 000;
-  «Дом» — минимальная цена 5 000;
-  «Дворец» — минимальная цена 10 000.
+function disableFilter () {
+  filter.classList.add('map__filters--disabled');
+  filterElements.forEach((element) => {
+    element.disabled = true;
+  });
+}
 
-Обратите внимание: вместе с минимальным значением цены нужно изменять и плейсхолдер.
+function enableFilter () {
+  filter.classList.remove('map__filters--disabled');
+  filterElements.forEach((element) => {
+    element.disabled = false;
+  });
+}
 
-Обратите внимание: ограничение минимальной цены заключается именно в изменении
-минимального значения, которое можно ввести в поле с ценой, изменять само значение поля не нужно,
-это приведёт к плохому UX (опыту взаимодействия).
+disableForm();
+disableFilter();
+/*
+Реализуйте с помощью JavaScript перевод страницы в неактивное состояние, все пункты, кроме первого про карту.
 
-Даже если текущее значение не попадает под новые ограничения,
-не стоит без ведома пользователя изменять значение поля.
+Важно. Неактивность должна добавляться именно средствами JavaScript, иначе,
+если классы и атрибуты добавить напрямую в HTML, при ошибке в скриптах
+или ошибке загрузки скриптов сайт будет недоступен пользователю.
 
-2.2 «Время заезда»,
-«Время выезда» — выбор опции одного поля автоматически изменят значение другого.
+1.1. Неактивное состояние. При открытии страница находится в неактивном состоянии:
 
-3. Подключите модуль в проект.
+  DONE 1. На месте карты отображается серый прямоугольник.
+
+  DONE 2. Форма заполнения информации об объявлении .ad-form содержит класс ad-form--disabled;
+
+  DONE 3. Все интерактивные элементы формы .ad-form должны быть заблокированы
+  с помощью атрибута disabled, добавленного на них или на их родительские блоки fieldset;
+
+  DONE 4. Форма с фильтрами .map__filters заблокирована так же,
+  как и форма .ad-form — на форму добавлен специальный класс,
+  а на её интерактивные элементы атрибуты disabled.
 */
