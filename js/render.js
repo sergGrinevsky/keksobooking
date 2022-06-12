@@ -1,9 +1,6 @@
 import {createObject} from './data.js';
 const cards = createObject();
 
-// Блок для отрисовки шаблона (временно)
-const mapCanvas = document.querySelector('#map-canvas');
-
 // Шаблон для заполнения
 const templateCard = document.querySelector('#card').content.querySelector('.popup');
 
@@ -57,13 +54,3 @@ function renderCard (card) {
 
   return template;
 }
-
-
-// for (let i = 0; i < cards.length; i++) {
-//   const declarationCard = renderCard(cards[i]);
-//   mapCanvas.appendChild(declarationCard);
-// }
-
-// Отрисуем на странице шаблон
-const declarationCard = renderCard(cards[0]);
-mapCanvas.appendChild(declarationCard);
