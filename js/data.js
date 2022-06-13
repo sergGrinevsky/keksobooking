@@ -1,6 +1,3 @@
-// Модуль данных
-
-// Нужно импортировать утилитарные функции
 import {
   getArrayRandomElements,
   getElementOfArray,
@@ -81,6 +78,5 @@ function createObject () {
   }
   return declarations;
 }
-
 
 export {createObject};
