@@ -1,10 +1,5 @@
-import {createObject} from './data.js';
-const cards = createObject();
-
-// Шаблон для заполнения
 const templateCard = document.querySelector('#card').content.querySelector('.popup');
 
-// Функция для генерации разметки
 function renderCard (card) {
   const template = templateCard.cloneNode(true);
   template.querySelector('.popup__title').textContent = card.offer.title;
@@ -54,3 +49,5 @@ function renderCard (card) {
 
   return template;
 }
+
+export {renderCard};
