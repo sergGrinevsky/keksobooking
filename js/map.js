@@ -1,4 +1,4 @@
-import {address, enableForm, enableFilter} from './form.js';
+import {address, enableForm, enableFilter, validatePrice} from './form.js';
 import { createObject } from './data.js';
 import { renderCard } from './render.js';
 
@@ -6,6 +6,7 @@ const map = L.map('map-canvas')
   .on('load', () => {
     enableForm();
     enableFilter();
+    validatePrice();
     address.value = '35.68172 139.75392';
   })
   .setView([
