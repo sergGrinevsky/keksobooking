@@ -13,6 +13,10 @@ const timeout = form.querySelector('#timeout');
 const address = form.querySelector('#address');
 address.readOnly = true;
 
+const roomNumbers = form.querySelector('#room_number');
+const capacity = form.querySelector('#capacity');
+const capacityElements = Array.from(capacity.children);
+
 const typeInitialPrice = {
   bungalow: 0,
   flat: 1000,
@@ -24,9 +28,58 @@ type.addEventListener('change', () => {
   validatePrice();
 });
 
-function validatePrice () {
+function validatePrice() {
   price.setAttribute('placeholder', typeInitialPrice[type.value]);
   price.setAttribute('min', typeInitialPrice[type.value]);
+}
+
+roomNumbers.addEventListener('change', () => {
+  validateRoomsAndQuests();
+});
+
+function clearDisable() {
+  capacityElements.forEach((item) => {
+    item.disabled = false;
+  });
+}
+
+function validateRoomsAndQuests() {
+  if (roomNumbers.value === '1') {
+    clearDisable();
+    capacity.value = '1';
+    capacityElements.forEach((item) => {
+      if (item.value !== '1') {
+        item.disabled = true;
+      }
+    });
+  }
+  if (roomNumbers.value === '2') {
+    clearDisable();
+    capacity.value = '1';
+    capacityElements.forEach((item) => {
+      if (item.value !== '1' && item.value !== '2') {
+        item.disabled = true;
+      }
+    });
+  }
+  if (roomNumbers.value === '3') {
+    clearDisable();
+    capacity.value = '1';
+    capacityElements.forEach((item) => {
+      if (item.value !=='3' && item.value !=='2' && item.value !=='1') {
+        item.disabled = true;
+      }
+    });
+  }
+  if (roomNumbers.value === '100') {
+    clearDisable();
+    capacity.value = '0';
+    capacityElements.forEach((item) => {
+      if (item.value !== '0') {
+        item.disabled = true;
+      }
+    });
+  }
 }
 
 timein.addEventListener('change', () => {
@@ -68,4 +121,4 @@ function enableFilter () {
 disableForm();
 disableFilter();
 
-export {address, enableForm, enableFilter};
+export {address, enableForm, enableFilter, validatePrice, validateRoomsAndQuests};
